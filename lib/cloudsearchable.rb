@@ -65,16 +65,48 @@ module Cloudsearchable
       @base = base
     end
 
-    def uint name, options = {}, &block
-      field name, :uint, options, &block
+    def int name, options = {}, &block
+      field name, :int, options, &block
+    end
+
+    def int_array name, options = {}, &block
+      field name, :int_array, options, &block
     end
 
     def text name, options = {}, &block
       field name, :text, options, &block
     end
 
+    def text_array name, options = {}, &block
+      field name, :text_array, options, &block
+    end
+
     def literal name, options = {}, &block
       field name, :literal, options, &block
+    end
+
+    def literal_array name, options = {}, &block
+      field name, :literal_array, options, &block
+    end
+
+    def date name, options = {}, &block
+      field name, :date, options, &block
+    end
+
+    def date_array name, options = {}, &block
+      field name, :date_array, options, &block
+    end
+
+    def double name, options = {}, &block
+      field name, :double, options, &block
+    end
+
+    def double_array name, options = {}, &block
+      field name, :double_array, options, &block
+    end
+
+    def latlon name, options = {}, &block
+      field name, :latlon, options, &block
     end
 
     def field name, type, options = {}, &block
