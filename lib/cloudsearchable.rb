@@ -135,6 +135,14 @@ module Cloudsearchable
       @default_domain
     end
 
+    def identify_field= identify_field 
+      @identify_field = identify_field.to_sym if identify_field
+    end
+
+    def identify_field 
+      @identify_field
+    end
+
     #
     # Declares a Cloudsearchable index that returns a list of object of this class.
     #
@@ -145,7 +153,7 @@ module Cloudsearchable
     #
     #
     def index_in_cloudsearch(name = nil, &block)
-      locator_field = :"#{cloudsearch_prefix.singularize}_id"
+      locator_field = identify_field ? identify_field : :"#{cloudsearch_prefix.singularize}_id"
       # Fetches the existing search domain, or generates a new one
       unless domain = cloudsearch_domains[name]
         domain = new_cloudsearch_index(name).tap do |d|
