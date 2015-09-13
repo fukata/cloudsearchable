@@ -95,6 +95,14 @@ module Cloudsearchable
       @cloudsearch_domains || {}
     end
 
+    def default_domain= domain
+      @default_domain = domain
+    end
+
+    def default_domain
+      @default_domain
+    end
+
     #
     # Declares a Cloudsearchable index that returns a list of object of this class.
     #
@@ -141,7 +149,11 @@ module Cloudsearchable
     end
 
     def new_cloudsearch_index name
-      name = [cloudsearch_prefix, name].compact.join('-').gsub('_','-')
+      if name or @default_domain.blank? then
+        name = [cloudsearch_prefix, name].compact.join('-').gsub('_','-')
+      else
+        name = @default_domain
+      end
       Cloudsearchable::Domain.new name
     end
 
