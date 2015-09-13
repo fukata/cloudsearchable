@@ -53,7 +53,7 @@ describe Cloudsearchable::Query do
       end
     end
 
-    context 'uint data type' do
+    context 'int data type' do
       it 'supports range query' do
         clazz.search.where(:helpfulness, :within_range, "0..#{123}").query.to_q[:bq].should =~ /helpfulness:0..123/
       end

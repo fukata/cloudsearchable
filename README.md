@@ -24,8 +24,8 @@ class Customer
     # Map the 'name' Ruby attribute to a field called 'test_name'
     text    :test_name,   :result_enabled => false, :search_enabled => true, :source => :name
 
-    # uint fields can be used in result ranking functions
-    uint    :helpfulness, :result_enabled => true,  :search_enabled => false do; 1234 end
+    # int fields can be used in result ranking functions
+    int    :helpfulness, :result_enabled => true,  :search_enabled => false do; 1234 end
   end
 
   # A named index.
@@ -56,11 +56,11 @@ Customer.search.where(:customer_id, :!=, 1234)                   # "not equal to
 Customer.search.text('test')                                     # text search
 Customer.search.text('test').where(:featured, :==, 'f')          # text search with other fields
 
-Customer.search.where(:helpfulness, :within_range, 0..123)       # uint range query, string range works too
-Customer.search.where(:helpfulness, :>, 123)                     # uint greather than
-Customer.search.where(:helpfulness, :>=, 123)                    # uint greather than or equal to
-Customer.search.where(:helpfulness, :<, 123)                     # uint less than
-Customer.search.where(:helpfulness, :<=, 123)                    # uint less than or equal to
+Customer.search.where(:helpfulness, :within_range, 0..123)       # int range query, string range works too
+Customer.search.where(:helpfulness, :>, 123)                     # int greather than
+Customer.search.where(:helpfulness, :>=, 123)                    # int greather than or equal to
+Customer.search.where(:helpfulness, :<, 123)                     # int less than
+Customer.search.where(:helpfulness, :<=, 123)                    # int less than or equal to
 ```
 These queries return a Cloudsearchable::Query, calling .to_a or .found_count will fetch the results
 ```ruby

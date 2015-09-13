@@ -37,7 +37,7 @@ module Cloudsearchable
     #   Collection.search.where(:customer_id, :==, 12345)
     #
     # The value you provide must be of the same type as the field.  For text and literal
-    # values, provide a string value.  For uint fields, provide a numeric value.
+    # values, provide a string value.  For int fields, provide a numeric value.
     #
     # To search for any of several possible values for a field, use the :any operator:
     #
@@ -208,7 +208,7 @@ module Cloudsearchable
       # Operations for which 'value' is not a scalar
       if op == :any
         '(or ' + value.map { |v| "#{field}:#{query_clause_value(type, v)}" }.join(' ') + ')'
-      elsif op == :within_range && type == :uint
+      elsif op == :within_range && type == :int
         "#{field}:#{value.to_s}"
       else
         value = query_clause_value(type, value)
@@ -222,7 +222,7 @@ module Cloudsearchable
           else
             # Operation-specific, type-specific operations on scalars
             case type
-              when :uint
+              when :int
                 case op
                   when :>
                     "#{field}:#{value+1}.."
@@ -243,7 +243,7 @@ module Cloudsearchable
     end
 
     def query_clause_value(type, value)
-      if type == :uint
+      if type == :int
         Integer(value)
       elsif !value.nil?
         "'#{value.to_s}'"
