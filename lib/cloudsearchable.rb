@@ -158,9 +158,9 @@ module Cloudsearchable
       unless domain = cloudsearch_domains[name]
         domain = new_cloudsearch_index(name).tap do |d|
           # This id field is used to reify search results
-          d.add_field(locator_field, :literal,
-            :result_enabled => true, :search_enabled => true,
-            :source => :id)
+          #d.add_field(locator_field, :literal,
+          #  :result_enabled => true, :search_enabled => true,
+          #  :source => :id)
         end
         self.cloudsearch_domains = self.cloudsearch_domains.merge({name => domain})
       end
