@@ -21,7 +21,7 @@ module CloudSearch
   end
 
   def self.post_sdf_list endpoint, sdf_list
-    uri = URI.parse("http://#{endpoint}/#{API_VERSION}/documents/batch")
+    uri = URI.parse("https://#{endpoint}/#{API_VERSION}/documents/batch")
 
     req = Net::HTTP::Post.new(uri.path)
     req.body = JSON.generate sdf_list

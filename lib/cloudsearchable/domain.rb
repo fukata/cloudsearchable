@@ -89,7 +89,7 @@ module Cloudsearchable
     end
 
     def execute_query(params)
-      uri    = URI("http://#{search_endpoint}/#{CloudSearch::API_VERSION}/search")
+      uri    = URI("https://#{search_endpoint}/#{CloudSearch::API_VERSION}/search")
       uri.query = URI.encode_www_form(params)
       Cloudsearchable.logger.info "CloudSearch execute: #{uri.to_s}"
       res = ActiveSupport::Notifications.instrument('cloudsearchable.execute_query') do
