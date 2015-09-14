@@ -175,6 +175,12 @@ module Cloudsearchable
       define_singleton_method search_method_name do
         Query.new(self, cloudsearch_index(name), locator_field)
       end
+
+      # Define the suggest method
+      suggest_method_name = "suggest#{name && ('_' + name.to_s)}".to_sym
+      define_singleton_method suggest_method_name do |*args|
+        domain.suggest(args)
+      end
     end
 
     def cloudsearch_index name = nil
