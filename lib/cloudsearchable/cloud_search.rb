@@ -2,8 +2,6 @@ require 'aws-sdk'
 require 'json'
 
 module CloudSearch
-  API_VERSION = "2013-01-01"
-
   def self.client_config= config
     @client_config = config
   end
@@ -29,21 +27,10 @@ module CloudSearch
   end
 
   def self.post_sdf_list endpoint, sdf_list
-    uri = URI.parse("https://#{endpoint}/#{API_VERSION}/documents/batch")
-
-    req = Net::HTTP::Post.new(uri.path)
-    req.body = JSON.generate sdf_list
-    req["Content-Type"] = "application/json"
-
-    http = Net::HTTP.new uri.host,uri.port
-    response = http.start{|http| http.request(req)}
-
-    if response.is_a? Net::HTTPSuccess
-      JSON.parse response.body
-    else
-      # Raise an exception based on the response see http://ruby-doc.org/stdlib-1.9.2/libdoc/net/http/rdoc/Net/HTTP.html
-      response.error!
-    end
-
+    client = Aws::CloudSearchDomain::Client.new(CloudSearch::client_config.merge(endpoint:"https://#{endpoint}"))
+    client.upload_documents(
+      documents: JSON.generate(sdf_list),
+      content_type: "application/json",
+    )
   end
 end
