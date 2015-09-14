@@ -178,7 +178,7 @@ module Cloudsearchable
 
       # Define the suggest method
       suggest_method_name = "suggest#{name && ('_' + name.to_s)}".to_sym
-      define_singleton_method suggest_method_name do |*args|
+      define_singleton_method suggest_method_name do |args|
         domain.suggest(*args)
       end
     end
