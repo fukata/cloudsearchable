@@ -155,33 +155,33 @@ module Cloudsearchable
       
       @results = domain.execute_query(to_q)
 
-      if @results && @results["info"] && messages = @results["info"]["messages"]
-        messages.each do |message|
-          if message["severity"] == "warning"
-            Cloudsearchable.logger.warn "Cloud Search Warning: #{message["code"]}: #{message["message"]}"
-            raise(WarningInQueryResult, "#{message["code"]}: #{message["message"]}") if @fatal_warnings
-          end
-        end
-      end
+      #if @results && @results["info"] && messages = @results["info"]["messages"]
+      #  messages.each do |message|
+      #    if message["severity"] == "warning"
+      #      Cloudsearchable.logger.warn "Cloud Search Warning: #{message["code"]}: #{message["message"]}"
+      #      raise(WarningInQueryResult, "#{message["code"]}: #{message["message"]}") if @fatal_warnings
+      #    end
+      #  end
+      #end
 
       true
     end
 
     def found_count
       materialize!
-      if @results['hits']
-        @results['hits']['found']
+      if @results.hits
+        @results.hits.found
       else
-        raise "improperly formed response. hits parameter not available. messages: #{@results["messages"]}"
+        #raise "improperly formed response. hits parameter not available. messages: #{@results["messages"]}"
       end
     end
     
     def each(&block)
       materialize!
-     if @results['hits']
-       @results['hits']['hit'].each(&block)
+     if @results.hits
+       @results.hits.hit.each(&block)
      else
-       raise "improperly formed response. hits parameter not available. messages: #{@results["messages"]}"
+       #raise "improperly formed response. hits parameter not available. messages: #{@results["messages"]}"
      end
     end
     

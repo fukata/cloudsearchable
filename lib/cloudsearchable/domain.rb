@@ -89,13 +89,14 @@ module Cloudsearchable
     end
 
     def execute_query(params)
+      client = Aws::CloudSeachDomain::Client.new(CloudSearch::client_config.merge(endpoint:"https://#{search_endpoint}"))
       uri    = URI("https://#{search_endpoint}/#{CloudSearch::API_VERSION}/search")
       uri.query = URI.encode_www_form(params)
       Cloudsearchable.logger.info "CloudSearch execute: #{uri.to_s}"
       res = ActiveSupport::Notifications.instrument('cloudsearchable.execute_query') do
-        Net::HTTP.get_response(uri).body
+        client.search(params)
       end
-      JSON.parse(res)
+      res
     end
 
     def deletion_sdf record_id, version

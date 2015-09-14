@@ -4,6 +4,14 @@ require 'json'
 module CloudSearch
   API_VERSION = "2013-01-01"
 
+  def self.client_config= config
+    @client_config = config
+  end
+
+  def self.client_config
+    @client_config || {}
+  end
+
   def self.client
     @client ||= Aws::CloudSearch::Client.new
   end
