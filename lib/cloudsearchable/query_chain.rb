@@ -194,12 +194,12 @@ module Cloudsearchable
       bq = (@clauses.count > 1) ? "(and #{@clauses.join(' ')})" : @clauses.first
       query = {
         q: @q,
-        bq: bq,
+        query: bq,
         rank: @rank,
         size: @limit,
         start: @offset,
       }
-      query[:'return-fields'] = @fields.reduce("") { |s,f| s << f.to_s } if @fields.length > 0
+      #query[:'return-fields'] = @fields.reduce("") { |s,f| s << f.to_s } if @fields.length > 0
       query
     end
 
