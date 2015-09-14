@@ -13,7 +13,7 @@ module CloudSearch
   end
 
   def self.client
-    @client ||= Aws::CloudSearch::Client.new
+    @client ||= Aws::CloudSearch::Client.new(client_config)
   end
 
   def self.client=(client)
