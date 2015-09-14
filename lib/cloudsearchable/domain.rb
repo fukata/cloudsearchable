@@ -88,7 +88,7 @@ module Cloudsearchable
       end
     end
 
-    def suggest query, suggester, size=nil
+    def suggest(query, suggester, size=1000)
       client = Aws::CloudSearchDomain::Client.new(CloudSearch::client_config.merge(endpoint:"https://#{search_endpoint}"))
       ActiveSupport::Notifications.instrument('cloudsearchable.suggest') do
         client.suggest(query: query, suggester: suggester, size: size)
