@@ -18,7 +18,7 @@ module Cloudsearchable
       @q              = nil
       @clauses        = []
       @rank           = nil
-      @limit          = 100000 # 10 is the CloudSearch default, 2kb limit will probably hit before this will
+      @limit          = 10000 # 10 is the CloudSearch default, 2kb limit will probably hit before this will
       @offset         = nil
       @fields         = Set.new
       @results        = nil
