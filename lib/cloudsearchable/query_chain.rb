@@ -195,6 +195,7 @@ module Cloudsearchable
       query = {
         q: @q,
         query: bq,
+        query_parser: "structured",
         rank: @rank,
         size: @limit,
         start: @offset,
