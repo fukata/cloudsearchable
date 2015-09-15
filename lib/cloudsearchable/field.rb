@@ -9,7 +9,7 @@ module Cloudsearchable
   # Represents a single field in a CloudSearch index.
   #
   class Field
-    FieldTypes = [:literal, :int, :int_array, :text, :text_array, :date, :double, :double_array, :latlon].freeze
+    FieldTypes = [:literal, :literal_array, :int, :int_array, :text, :text_array, :date, :double, :double_array, :latlon].freeze
     # Maps the type of field to the name of the options hash when defining the field
     FieldTypeOptionsNames = {:literal => :literal_options, :literal_array => :literal_array_options, :int => :int_options, :int_array => :int_array_options, :text => :text_options, :text_array => :text_array_options, 
       :date => :date_options, :date_array => :date_array_options, :double => :double_options, :double_array => :double_array_options, :latlon => :lat_lon_options}.freeze
